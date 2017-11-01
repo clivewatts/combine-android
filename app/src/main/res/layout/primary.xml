@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/combine_light_grey"
+    android:animateLayoutChanges="true">
+
+
+    <com.mindorks.framework.mvp.ui.main.CustomScrollView
+        android:id="@+id/custom_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:id="@+id/card_container_frame"
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <com.mindorks.framework.mvp.ui.steamcard.CustomSwipePlaceHolderView
+                    android:id="@+id/cards_container"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content" />
+
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/steam_card_details_container"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </com.mindorks.framework.mvp.ui.main.CustomScrollView>
+
+</RelativeLayout>
+

@@ -48,4 +48,12 @@
     <color name="yellow">#fff44f</color>
     <color name="steam_card_background">#082F4B</color>
     <color name="steam_card_border">#082F3C</color>
+
+
+    <!--//COOLORS-->
+    <color name="combine_light_grey">#D7CDCC</color>
+    <color name="combine_slate_grey">#717C89</color>
+    <color name="combine_cadet_grey">#8AA2A9</color>
+    <color name="combine_pastel_blue">#AECCC3</color>
+    <color name="combine_bone">#D7D9B1</color>
 </resources>

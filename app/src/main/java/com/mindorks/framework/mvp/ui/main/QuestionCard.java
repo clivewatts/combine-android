@@ -35,24 +35,24 @@ import com.mindorks.placeholderview.annotations.View;
 @Layout(R.layout.card_layout)
 public class QuestionCard {
 
-    private static final String TAG = "QuestionCard";
-
-    @View(R.id.steam_image_view)
-    private ANImageView steamImageView;
-
-    private SteamGameCard mSteamGameCard;
-
-
-    public QuestionCard(SteamGameCard card) {
-        mSteamGameCard = card;
-    }
-
-    @Resolve
-    private void onResolved() {
-        if (mSteamGameCard.getImgUrl() != null) {
-            steamImageView.setImageUrl(mSteamGameCard.getImgUrl());
-        }
-    }
+//    private static final String TAG = "QuestionCard";
+//
+//    @View(R.id.steam_image_view)
+//    private ANImageView steamImageView;
+//
+//    private SteamGameCard mSteamGameCard;
+//
+//
+//    public QuestionCard(SteamGameCard card) {
+//        mSteamGameCard = card;
+//    }
+//
+//    @Resolve
+//    private void onResolved() {
+//        if (mSteamGameCard.getImgUrl() != null) {
+//            steamImageView.setImageUrl(mSteamGameCard.getImgUrl());
+//        }
+//    }
 
     private void showCorrectOptions() {
 //        for (int i = 0; i < 3; i++) {
