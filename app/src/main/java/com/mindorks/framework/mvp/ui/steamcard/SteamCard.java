@@ -28,8 +28,8 @@ import com.mindorks.placeholderview.annotations.swipe.SwipeOutState;
 @Layout(R.layout.card_layout)
 public class SteamCard {
 
-    @View(R.id.profileImageView)
-    private ImageView profileImageView;
+    @View(R.id.app_image_view)
+    private ImageView appImageView;
 
     @View(R.id.nameAgeTxt)
     private TextView nameAgeTxt;
@@ -50,7 +50,7 @@ public class SteamCard {
 
     @Resolve
     private void onResolved(){
-        Glide.with(mContext).load(mApp.getDetails().getScreenshots().get(0)).into(profileImageView);
+        Glide.with(mContext).load(mApp.getDetails().getScreenshots().get(0)).into(appImageView);
         nameAgeTxt.setText(mApp.getDetails().getName());
         locationNameTxt.setText(mApp.getDetails().getShortDescription());
         delegate.onSteamCardShown(mApp);

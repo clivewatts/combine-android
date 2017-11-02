@@ -19,6 +19,9 @@ import android.app.Application;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor.Level;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
 import com.mindorks.framework.mvp.data.DataManager;
 import com.mindorks.framework.mvp.di.component.ApplicationComponent;
 import com.mindorks.framework.mvp.di.component.DaggerApplicationComponent;
@@ -54,6 +57,13 @@ public class MvpApp extends Application {
         mApplicationComponent.inject(this);
 
         AppLogger.init();
+
+        ImagePipelineConfig config = ImagePipelineConfig.newBuilder(this)
+                .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())
+                .setResizeAndRotateEnabledForNetwork(true)
+                .setDownsampleEnabled(true)
+                .build();
+        Fresco.initialize(this, config);
 
         AndroidNetworking.initialize(getApplicationContext());
         if (BuildConfig.DEBUG) {

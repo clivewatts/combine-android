@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.mindorks.framework.mvp.R;
 import com.mindorks.framework.mvp.data.db.model.SteamGameCard;
 import com.mindorks.framework.mvp.data.network.model.App;
 import com.mindorks.framework.mvp.data.network.model.CombineCollection;
+import com.mindorks.framework.mvp.data.network.model.Platforms;
 import com.mindorks.framework.mvp.data.network.model.Profile;
 import com.mindorks.framework.mvp.data.network.model.Tag;
 import com.mindorks.framework.mvp.ui.base.BaseActivity;
@@ -37,6 +39,7 @@ import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.infinite.LoadMore;
 import com.mindorks.placeholderview.annotations.swipe.SwipeView;
 import com.mindorks.placeholderview.listeners.ItemRemovedListener;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 
 import java.util.List;
 
@@ -64,9 +67,11 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
 
         mSwipeView.getBuilder()
                 .setDisplayViewCount(1)
+                .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL)
                 .setSwipeDecor(new SwipeDecor()
                         .setPaddingTop(0)
-                        .setRelativeScale(0.01f)
+                        .setRelativeScale(0.00f)
+                        .setSwipeMaxChangeAngle(0.0f)
                         .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
                         .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
 
@@ -140,10 +145,18 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
     }
 
     @Override
-    public void onSteamCardShown(App app) {
+    public void onSteamCardShown(final App app) {
         Log.i("SHOWN", app.getDetails().getName());
+        findViewById(R.id.app_image_view).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new ImageViewer.Builder(MainActivity.this, app.getDetails().getScreenshots())
+                        .setStartPosition(0)
+                        .show();
+            }
+        });
         addTagCardToLayout(app.getOwners().getTags());
-        slowFadeIn(mSwipeView);
+        configureOsSupportCard(app.getDetails().getPlatforms());
         slowFadeIn(scrollView);
     }
 
@@ -166,7 +179,24 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
 
     }
 
-    private void refreshViewForSteamApp(App app) {
+    public void configureOsSupportCard(Platforms platforms) {
+        ImageView w = (ImageView) findViewById(R.id.windows_compat_img);
+
+        if (!platforms.getWindows()) {
+            w.setAlpha(0.1f);
+        }
+
+        ImageView o = (ImageView) findViewById(R.id.osx_compat_img);
+
+        if (!platforms.getMac()) {
+            o.setAlpha(0.1f);
+        }
+
+        ImageView l = (ImageView) findViewById(R.id.linux_compat_img);
+
+        if (!platforms.getLinux()) {
+            l.setAlpha(0.1f);
+        }
 
     }
 
