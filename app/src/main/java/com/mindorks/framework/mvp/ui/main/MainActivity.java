@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
     private Context mContext;
     private CustomScrollView scrollView;
     private LinearLayout cardHolder;
+    private FrameLayout osSupportContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,6 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
         mSwipeView = (CustomSwipePlaceHolderView)findViewById(R.id.cards_container);
         mSwipeView.setScrollView(scrollView);
         cardHolder = (LinearLayout)findViewById(R.id.steam_card_details_container);
-
         mContext = getApplicationContext();
 
         mSwipeView.getBuilder()
@@ -71,9 +71,7 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
                 .setSwipeDecor(new SwipeDecor()
                         .setPaddingTop(0)
                         .setRelativeScale(0.00f)
-                        .setSwipeMaxChangeAngle(0.0f)
-                        .setSwipeInMsgLayoutId(R.layout.swipe_in_msg)
-                        .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg));
+                        .setSwipeMaxChangeAngle(0.0f));
 
         mSwipeView.addItemRemoveListener(new ItemRemovedListener() {
             @Override
@@ -85,24 +83,6 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
         });
 
         loadCards(false);
-    }
-
-    private void slowFadeIn(View view) {
-        Animation animation1;
-        animation1 = new AlphaAnimation(0.0f, 1.0f);
-        animation1.setDuration(600);
-        animation1.setStartOffset(100);
-
-        view.startAnimation(animation1);
-    }
-
-    private void slowFadeOut(View view) {
-        Animation animation1;
-        animation1 = new AlphaAnimation(1.0f, 0.0f);
-        animation1.setDuration(400);
-        animation1.setStartOffset(100);
-
-        mSwipeView.startAnimation(animation1);
     }
 
     @Override
@@ -145,8 +125,8 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
     }
 
     @Override
-    public void onSteamCardShown(final App app) {
-        Log.i("SHOWN", app.getDetails().getName());
+    public void onSteamCardShown(final App app, SwipePlaceHolderView view) {
+
         findViewById(R.id.app_image_view).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,49 +135,19 @@ public class MainActivity extends BaseActivity implements SteamCardInterface {
                         .show();
             }
         });
-        addTagCardToLayout(app.getOwners().getTags());
-        configureOsSupportCard(app.getDetails().getPlatforms());
-        slowFadeIn(scrollView);
+
+        addCardToContainer(CardUtils.getTagCard(app.getOwners().getTags(), MainActivity.this));
+        addOsSupportToCard(CardUtils.getOsSupportCard(app.getDetails().getPlatforms(), MainActivity.this), view);
+        CardUtils.slowFadeIn(scrollView);
     }
 
-    public void addTagCardToLayout(List<Tag> tags) {
-
-        cardHolder.removeView(cardHolder.findViewWithTag("tag_card"));
-
-        FrameLayout view = (FrameLayout)getLayoutInflater().inflate(R.layout.steam_card_tag_layout, null);
-        view.setTag("tag_card");
-        String tagString = new String();
-        for(Tag t : tags) {
-            if (tagString.equals("")) {
-                tagString = t.getTag();
-            } else {
-                tagString = tagString + " | " + t.getTag();
-            }
-        }
-        ((TextView)view.findViewById(R.id.tag_text)).setText(tagString);
+    private void addCardToContainer(View view) {
         cardHolder.addView(view);
-
     }
 
-    public void configureOsSupportCard(Platforms platforms) {
-        ImageView w = (ImageView) findViewById(R.id.windows_compat_img);
-
-        if (!platforms.getWindows()) {
-            w.setAlpha(0.1f);
-        }
-
-        ImageView o = (ImageView) findViewById(R.id.osx_compat_img);
-
-        if (!platforms.getMac()) {
-            o.setAlpha(0.1f);
-        }
-
-        ImageView l = (ImageView) findViewById(R.id.linux_compat_img);
-
-        if (!platforms.getLinux()) {
-            l.setAlpha(0.1f);
-        }
-
+    private void addOsSupportToCard(View view, SwipePlaceHolderView dst) {
+        osSupportContainer = (FrameLayout)dst.findViewById(R.id.os_card_container);
+        osSupportContainer.addView(view);
     }
 
 }

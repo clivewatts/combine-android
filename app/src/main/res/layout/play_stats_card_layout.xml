@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:orientation="vertical">
+    <android.support.v7.widget.CardView
+        android:orientation="vertical"
+        android:background="@color/combine_slate_grey"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:cardCornerRadius="7dp">
+
+        
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.github.pavlospt.CircleView
+                android:layout_weight="1"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cv_titleText="9000"
+                app:cv_subtitleText="Total Players"
+                app:cv_titleSize="12dp"
+                app:cv_subtitleSize="9dp"
+                app:cv_titleColor="@color/orange"
+                app:cv_subtitleColor="@color/orange"
+                app:cv_strokeColorValue="@color/orange"
+                app:cv_backgroundColorValue="@color/red_dark"
+                app:cv_fillColor="@color/combine_cadet_grey"
+                app:cv_fillRadius="0.9"
+                app:cv_strokeWidthSize="10"/>
+
+            <com.github.pavlospt.CircleView
+                android:layout_weight="1"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cv_titleText="9000"
+                app:cv_subtitleText="Total Players"
+                app:cv_titleSize="12dp"
+                app:cv_subtitleSize="9dp"
+                app:cv_titleColor="@color/orange"
+                app:cv_subtitleColor="@color/orange"
+                app:cv_strokeColorValue="@color/orange"
+                app:cv_backgroundColorValue="@color/red_dark"
+                app:cv_fillColor="@color/combine_cadet_grey"
+                app:cv_fillRadius="0.9"
+                app:cv_strokeWidthSize="10"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.github.pavlospt.CircleView
+                android:layout_weight="1"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cv_titleText="9000"
+                app:cv_subtitleText="Total Players"
+                app:cv_titleSize="12dp"
+                app:cv_subtitleSize="9dp"
+                app:cv_titleColor="@color/orange"
+                app:cv_subtitleColor="@color/orange"
+                app:cv_strokeColorValue="@color/orange"
+                app:cv_backgroundColorValue="@color/red_dark"
+                app:cv_fillColor="@color/combine_cadet_grey"
+                app:cv_fillRadius="0.9"
+                app:cv_strokeWidthSize="10"/>
+
+            <com.github.pavlospt.CircleView
+                android:layout_weight="1"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cv_titleText="9000"
+                app:cv_subtitleText="Total Players"
+                app:cv_titleSize="12dp"
+                app:cv_subtitleSize="9dp"
+                app:cv_titleColor="@color/orange"
+                app:cv_subtitleColor="@color/orange"
+                app:cv_strokeColorValue="@color/orange"
+                app:cv_backgroundColorValue="@color/red_dark"
+                app:cv_fillColor="@color/combine_cadet_grey"
+                app:cv_fillRadius="0.9"
+                app:cv_strokeWidthSize="10"/>
+        </LinearLayout>
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+</FrameLayout>

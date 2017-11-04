@@ -1,7 +1,9 @@
 package com.mindorks.framework.mvp.ui.steamcard;
 
 import android.content.Context;
+import android.text.Html;
 import android.util.Log;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -10,6 +12,7 @@ import com.mindorks.framework.mvp.R;
 import com.mindorks.framework.mvp.data.network.model.App;
 import com.mindorks.framework.mvp.data.network.model.Profile;
 import com.mindorks.framework.mvp.ui.main.MainActivity;
+import com.mindorks.framework.mvp.utils.cards.CardUtils;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
@@ -37,6 +40,9 @@ public class SteamCard {
     @View(R.id.locationNameTxt)
     private TextView locationNameTxt;
 
+    @View(R.id.os_card_container)
+    private FrameLayout osCardContainer;
+
     private App mApp;
     private Context mContext;
     private SwipePlaceHolderView mSwipeView;
@@ -52,8 +58,9 @@ public class SteamCard {
     private void onResolved(){
         Glide.with(mContext).load(mApp.getDetails().getScreenshots().get(0)).into(appImageView);
         nameAgeTxt.setText(mApp.getDetails().getName());
-        locationNameTxt.setText(mApp.getDetails().getShortDescription());
-        delegate.onSteamCardShown(mApp);
+        locationNameTxt.setText(Html.fromHtml(mApp.getDetails().getShortDescription()));
+        osCardContainer.addView(CardUtils.getOsSupportCard(mApp.getDetails().getPlatforms(),(MainActivity)mContext));
+        delegate.onSteamCardShown(mApp, mSwipeView);
     }
 
     @SwipeOut
